@@ -1,24 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import ReactDOM from "react-dom/client";
+import { Routes, Route } from "react-router-dom";
+
+
+import { Box, CssBaseline, Stack, ThemeProvider } from "@mui/material";
+import { ColorModeContext, useMode } from "./theme";
+
+import ContentsContainer from './Components/ContentsContainer';
+import LandingPage from './Components/LandingPage';
+import DashBoard from "./Components/DashBoard";
+
 
 function App() {
+  const [theme, colorMode] = useMode();
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline/>
+        <Routes>
+          <Route path="/" Component={LandingPage}/>
+          <Route path="/dashboard/*" Component={DashBoard}/>
+        </Routes>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+    
+    //<LandingPage/>
+    // <ColorModeContext.Provider value={colorMode}>
+    //   <ThemeProvider theme={theme}>
+    //     <CssBaseline/>
+    //     <Box>
+    //       <LandingPage/>
+    //       {/* <NavBar/>
+    //       <Stack direction={'row' } spacing={2} justifyContent={'space-between'}>
+    //         <SideBar/>
+    //         <ContentsContainer/>
+    //       </Stack> */}
+    //     </Box>
+    //   </ThemeProvider>
+    // </ColorModeContext.Provider>
+    //<LandingPage/>
+    // <Box>
+    //   <CssBaseline/>
+    //   <NavBar/>
+    //   <Stack direction={'row' } spacing={2} justifyContent={'space-between'}>
+    //     <SideBar/>
+    //     <ContentsContainer/>
+    //   </Stack>
+    // </Box>
   );
 }
 
