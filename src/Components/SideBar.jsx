@@ -37,7 +37,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
 const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [selected, setSelected] = useState("Dashboard");
   const user = useContext(UserContext);
   //console.log(user)
@@ -60,7 +60,7 @@ const Sidebar = () => {
         "& .pro-menu-item.active": {
           color: "#6870fa !important",
         },
-        height:'100vh !important',
+        height:'100% !important',
       }}
     >
       <ProSidebar collapsed={isCollapsed}>

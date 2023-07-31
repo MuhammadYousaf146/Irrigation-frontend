@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import React from 'react'
 import Header from './Header';
 import { useTheme } from '@emotion/react';
@@ -9,10 +9,39 @@ import { mockLineData as data } from './data'
 const LineChart = (props) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    // console.log(props.data)
+    // console.log(props.temp)
   return (
-    <Box m={'20px'}>
-        <Header title={props.title} subtitle={props.subtitle}/>
-        <Box height={'60vh'} width={'100%'} maxWidth={'160vh'}>
+    <Box m={'20px'}flexGrow={1}>
+        <Box display={'flex'} justifyContent={'space-between'}>
+            <Box>
+                <Header title={props.title} subtitle={props.subtitle}/>
+            </Box>
+            <Box width={"15%"}>
+                <FormControl fullWidth color='secondary'>
+                    <InputLabel>{"Graph By"}</InputLabel>
+                    <Select
+                        value={props.graphBy}
+                        label="Graph By"
+                        onChange={(event)=>{
+                            props.handleGraphChange(event);
+                        }}
+                    >
+                        <MenuItem value={"Hours"}>Hours</MenuItem>
+                        <MenuItem value={"Days"}>Days</MenuItem>
+
+                        {/* {//map function for objects in js
+                        Object.keys(props.fields).map(function(key, value) {
+                            return(
+                            <MenuItem key={key} value={props.fields[key].boardID}>{props.fields[key].boardID}</MenuItem>
+                            );
+                        })
+                        } */}
+                    </Select>
+                </FormControl>
+            </Box>
+        </Box>
+        <Box height={'60vh'} flexGrow={1}>
             <ResponsiveLine
                 data={[{"id":props.title,"data":props.data}]}
                 theme={{

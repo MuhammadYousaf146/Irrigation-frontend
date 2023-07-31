@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Typography, Box } from "@mui/material";
+import { Button, Dialog, CircularProgress , DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Typography, Box } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import React from "react";
 import { useFormik } from 'formik';
@@ -19,6 +19,7 @@ export default function Login(props) {
     const [error, setError] = useState("");
     const [loaded, setLoaded] = useState(false);
     const [isLoginPressed, setIsLoginPressed] = useState(false);
+    const [progress, setProgress] = useState(false);
     const navigate = useNavigate();
 
     axios.defaults.withCredentials = true;
@@ -40,6 +41,7 @@ export default function Login(props) {
         onSubmit: (values)=>{
             //console.log(values)
             setIsLoginPressed(true)
+            setProgress(true)
             axios
             .post("http://localhost:3001/login", values)
             .then((response) => setData(response.data))
@@ -61,6 +63,7 @@ export default function Login(props) {
     })
 
     
+    
 
     
 
@@ -74,6 +77,7 @@ export default function Login(props) {
     return (
     <div>
       <Dialog open={props.open} onClose={props.handleClose}>
+        
         <DialogTitle align="center" variant="h4">Please Login</DialogTitle>
         <DialogContent align={'center'}>
           <DialogContentText mb={2}>
@@ -121,9 +125,16 @@ export default function Login(props) {
             {/* {formik.touched.email && formik.errors.email && <Typography>{formik.errors.email}</Typography>} */}
            
           
-            <Button type="submit" variant="contained" onClick={formik.handleSubmit}>
-                Login
-            </Button>
+            <Box mt={2}>
+              <Box>
+                <Button type="submit" variant="contained" onClick={formik.handleSubmit}>
+                    Login
+                </Button>
+              </Box>
+              <Box mt={2}>
+                {progress && !loaded && <CircularProgress size={25}/>}
+              </Box>
+            </Box>
     
       
         </DialogContent>
