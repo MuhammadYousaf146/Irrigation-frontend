@@ -1,9 +1,7 @@
-import { Box, FormControl, Grid, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material'
+import { Box, Grid, IconButton, Typography } from '@mui/material'
 import React, { useState } from 'react'
-import TemperatureCard from './TemperatureCard'
-import HumidityCard from './HumidityCard'
-import MoistureCard from './MoistureCard'
-import { usestate, useEffect } from 'react'
+
+import { useEffect } from 'react'
 import axios from 'axios'
 import { useTheme } from '@emotion/react'
 import { tokens } from '../theme'
@@ -12,6 +10,7 @@ import MyCard from './MyCard'
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import WaterIcon from '@mui/icons-material/Water';
 import OpacityIcon from '@mui/icons-material/Opacity';
+import ReplayOutlinedIcon from "@mui/icons-material/ReplayOutlined"
 import Wave from 'react-wavify';
 import moment from 'moment';
 
@@ -46,17 +45,17 @@ const ContentsContainer = (props) => {
   useEffect(()=>{
     if(props.field)
       {axios.post("http://localhost:3001/getAutoMotor",{field:props.field}).then((response)=>{
-        if(response.data[0].automanual==0)
+        if(response.data[0].automanual===0)
           setIsAutoChecked(false)
         else
           setIsAutoChecked(true)
 
-        if(response.data[0].m1==0)
+        if(response.data[0].m1===0)
           setIsMotor1(false)
         else
           setIsMotor1(true)
 
-        if(response.data[0].m2==0)
+        if(response.data[0].m2===0)
           setIsMotor2(false)
         else
           setIsMotor2(true)
@@ -66,7 +65,7 @@ const ContentsContainer = (props) => {
         setIsRecordLoaded(true)
         //console.log({"auto":isAutoChecked,"m1":isMotor1,"m2":isMotor2})
       })}
-  },[props.field])
+  },[props.field,props.refresh])
 
   useEffect(()=>{
     if(props.data.date)
@@ -107,7 +106,10 @@ const ContentsContainer = (props) => {
     <Box m={'20px'}>
       <Box display={'flex'} justifyContent={'space-between'}>
         <Header title="DASHBOARD" subtitle="Welcome to your dashboard"/>
-        <Typography>{datetime}</Typography>
+        <Box display={'flex'} height={'50%'} justifyContent={"center"}>
+          <IconButton onClick={props.toggleRefresh}><ReplayOutlinedIcon sx={{color:colors.grey[100]}} fontSize='small'/></IconButton>
+          <Typography mt={0.71}>{datetime}</Typography>
+        </Box>
       </Box>
         <Grid container spacing={2} columns={{ xs: 4, md: 12 }}>
             <Grid item xs={4} md={4}>

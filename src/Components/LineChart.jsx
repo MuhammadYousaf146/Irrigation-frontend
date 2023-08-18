@@ -4,15 +4,16 @@ import Header from './Header';
 import { useTheme } from '@emotion/react';
 import { tokens } from '../theme';
 import { ResponsiveLine } from "@nivo/line";
-import { mockLineData as data } from './data'
+//import { mockLineData as data } from './data'
 
 const LineChart = (props) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
+    // console.log(props.graphBy)
     // console.log(props.data)
     // console.log(props.temp)
   return (
-    <Box m={'20px'}flexGrow={1}>
+    <Box m={'20px'}>
         <Box display={'flex'} justifyContent={'space-between'}>
             <Box>
                 <Header title={props.title} subtitle={props.subtitle}/>
@@ -41,7 +42,7 @@ const LineChart = (props) => {
                 </FormControl>
             </Box>
         </Box>
-        <Box height={'60vh'} flexGrow={1}>
+        <Box height={'60vh'} width={'100%'} maxWidth={'160vh'}>
             <ResponsiveLine
                 data={[{"id":props.title,"data":props.data}]}
                 theme={{
@@ -96,7 +97,7 @@ const LineChart = (props) => {
                     tickSize: 0,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: props.isDashboard ? undefined : "transportation", // added
+                    legend: props.isDashboard ? undefined : "DateTime", // added
                     legendOffset: 36,
                     legendPosition: "middle",
                 }}
@@ -106,7 +107,7 @@ const LineChart = (props) => {
                     tickSize: 3,
                     tickPadding: 5,
                     tickRotation: 0,
-                    legend: props.isDashboard ? undefined : "count", // added
+                    legend: props.isDashboard ? undefined : props.title, // added
                     legendOffset: -40,
                     legendPosition: "middle",
                 }}

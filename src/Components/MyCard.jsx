@@ -1,6 +1,5 @@
-import { Box, Card, CardContent, CardHeader, Stack, Typography, Switch } from '@mui/material'
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import React, { useState, useEffect } from 'react'
+import { Box, Card, CardContent, Stack, Typography, Switch } from '@mui/material'
+import React, { useState } from 'react'
 import { tokens } from '../theme';
 import { useTheme } from '@emotion/react';
 
@@ -9,7 +8,7 @@ import { useTheme } from '@emotion/react';
 const MyCard = (props) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    //console.log(props)
+   
 
     return (
         <Card sx={{borderRadius:'22px', backgroundColor:colors.primary[400]}}>

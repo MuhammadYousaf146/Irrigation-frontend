@@ -1,19 +1,19 @@
-import { Button, Dialog, CircularProgress , DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Typography, Box } from "@mui/material";
+import { Button, Dialog, CircularProgress , DialogActions, DialogContent, DialogContentText, DialogTitle, Box } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import React from "react";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import LoginIcon from '@mui/icons-material/Login';
+//import LoginIcon from '@mui/icons-material/Login';
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useTheme } from "@emotion/react";
-import { tokens } from "../theme";
+// import { useTheme } from "@emotion/react";
+// import { tokens } from "../theme";
 
 export default function Login(props) {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
+    // const theme = useTheme();
+    // const colors = tokens(theme.palette.mode);
 
     const [data, setData] = useState({});
     const [error, setError] = useState("");
@@ -61,18 +61,6 @@ export default function Login(props) {
         navigate("/dashboard");
       }
     })
-
-    
-    
-
-    
-
-    const handleLogin = (event) => {
-        // event.preventDefault();
-        // setIsLoginPressed(true)
-        // console.log(inputs)
-       
-    };
 
     return (
     <div>

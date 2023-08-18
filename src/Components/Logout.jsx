@@ -12,8 +12,8 @@ const Logout = () => {
           })
       },[])
   return (
-    <Box>
-        <Typography p={10} variant='h2'> 
+    <Box position={'absolute'} top={"50%"} right={"40%"}>
+        <Typography variant='h2'> 
             Logging off...
         </Typography>
     </Box>

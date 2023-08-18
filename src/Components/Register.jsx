@@ -1,14 +1,13 @@
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, TextField, Typography } from "@mui/material";
+import {  Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,  Grid, TextField } from "@mui/material";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from 'yup'
-import PhoneInput from 'react-phone-number-input'
+//import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
-import LoginIcon from '@mui/icons-material/Login';
+//import LoginIcon from '@mui/icons-material/Login';
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 export default function Register(props) {
 
@@ -17,10 +16,8 @@ export default function Register(props) {
     const [data, setData] = useState({});
     const [error, setError] = useState("");
     const [loaded, setLoaded] = useState(false);
-    const [value, setValue] = useState();
     const phoneRegExp = "^((\\+92)?(0092)?(92)?(0)?)(3)([0-9]{9})$";
     const cnicRegExp = "^[0-9]{5}-[0-9]{7}-[0-9]$";
-    const navigate = useNavigate();
 
     //const passwordRegExp = "^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^\w\d\s:])([^\s]){8,}$";
 
@@ -79,26 +76,7 @@ export default function Register(props) {
     })
 
 
-    const handleChange = (event) => {
-      //const value = event.target.value;
-      //setValue(value);
-      console.log(event);
-    }
-
-    const handleLogin = (event) => {
-        // event.preventDefault();
-        //setIsLoginPressed(true)
-        // console.log(inputs)
-        // axios
-        // .post("http://localhost:3001/register", inputs)
-        // .then((response) => setData(response.data))
-        // .catch((error) => setError(error.message))
-        // .finally(() => setLoaded(true));
-
-        // console.log(data)
-        // console.log(error)
-        // console.log(loaded)
-    };
+    
 
     return (
     <div>
