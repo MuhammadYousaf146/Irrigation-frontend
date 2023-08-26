@@ -1,28 +1,46 @@
-import { Card, CardContent, CardHeader, Stack, Typography } from '@mui/material'
-import WbSunnyIcon from '@mui/icons-material/WbSunny';
-import React, { useState, useEffect } from 'react'
-import { tokens } from '../theme';
-import { useTheme } from '@emotion/react';
+import React, { useState, useRef } from "react";
 
+function WebcamCapture() {
+  const [imageSrc, setImageSrc] = useState("");
+  const videoRef = useRef(null);
 
+  const handleStartCapture = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      videoRef.current.srcObject = stream;
+    } catch (error) {
+      console.error("Error accessing webcam:", error);
+    }
+  };
 
-const TemperatureCard = (props) => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
-
-
-
-    return (
-        <Card sx={{borderRadius:'22px', backgroundColor:colors.primary[400]}}>
-            <CardHeader backgroundColor='red' title="Temperature" subheader="Gujrat, PK"/>
-            <CardContent>
-                <Stack direction={'row'} alignItems={'center'} spacing={3}>
-                    <Typography variant='h3'>{props.value}{'\u00b0'}C</Typography>
-                    <WbSunnyIcon sx={{ width: 40, height: 40 }}/>
-                </Stack>
-            </CardContent>
-        </Card>
-    )
+  const handleCapture = () => {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
+    canvas.width = videoRef.current.videoWidth;
+    canvas.height = videoRef.current.videoHeight;
+    context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+    const dataURL = canvas.toDataURL("image/jpeg"); // or "image/png" for PNG format
+    setImageSrc(dataURL);
+    
+  };
+  console.log(imageSrc)
+  return (
+    <div>
+      <div>
+        <video ref={videoRef} autoPlay playsInline muted />
+      </div>
+      <div>
+        <button onClick={handleStartCapture}>Start Webcam</button>
+        <button onClick={handleCapture}>Capture Photo</button>
+      </div>
+      {imageSrc && (
+        <div>
+          <h2>Captured Photo:</h2>
+          <img src={imageSrc} alt="Captured" />
+        </div>
+      )}
+    </div>
+  );
 }
 
-export default TemperatureCard
+export default WebcamCapture;

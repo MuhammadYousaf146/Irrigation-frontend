@@ -40,7 +40,8 @@ const MyCard = (props) => {
                 }
                 {
                     props.water && <Box display={'flex'} direction={'column'} justifyContent={'space-around'}>
-                        <Box>
+                        <Box display={'flex'} flexDirection={'column'}>
+                            
                             <Switch
                                 checked={props.motor1}
                                 onChange={props.onMotor1Change}

@@ -156,7 +156,7 @@ const Sidebar = () => {
 
             
             <Item
-              title="Desease Detector"
+              title="Disease Detector"
               to="/dashboard/ai"
               icon={<PsychologyIcon />}
               selected={selected}

@@ -9,7 +9,8 @@ import { UserContext } from './UserContext'
 import { Route, Routes, useNavigate } from 'react-router-dom'
 import Logout from './Logout'
 import LineChart from './LineChart'
-import DeseaseDetector from './DeseaseDetector'
+import DiseaseDetector from './DiseaseDetector'
+
 
 const DashBoard = () => {
   axios.defaults.withCredentials = true;
@@ -141,7 +142,7 @@ const DashBoard = () => {
                 <Route path='/temperature' element={<LineChart graphBy={graphBy} handleGraphChange={handleGraphChange} title="Temperature" subtitle="Analyzing the temperature." data={graphBy==="Days"? temperatureChartDataByDays : temperatureChartDataByHours}/>}/>
                 <Route path='/humidity' element={<LineChart graphBy={graphBy} handleGraphChange={handleGraphChange} title="Humidity" subtitle="Analyzing the Humidity." data={graphBy==="Days"? humidityChartDataByDays : humidityChartDataByHours}/>}/>
                 <Route path='/moisture' element={<LineChart graphBy={graphBy} handleGraphChange={handleGraphChange} title="Moisture" subtitle="Analyzing the Moisture." data={graphBy==="Days"? moistureChartDataByDays : moistureChartDataByHours}/>}/>
-                <Route path='/ai' element={<DeseaseDetector />} />
+                <Route path='/ai' element={<DiseaseDetector/>} />
 
                 {/* <Route path="dashboard/temperature" element={<ContentsContainer />} />
                 <Route path="/" element={<ContentsContainer />} />

@@ -1,4 +1,4 @@
-import {  Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,  Grid, TextField } from "@mui/material";
+import {  Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,  Grid, TextField } from "@mui/material";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from 'yup'
@@ -15,6 +15,7 @@ export default function Register(props) {
 
     const [data, setData] = useState({});
     const [error, setError] = useState("");
+    const [progress, setProgress] = useState(false);
     const [loaded, setLoaded] = useState(false);
     const phoneRegExp = "^((\\+92)?(0092)?(92)?(0)?)(3)([0-9]{9})$";
     const cnicRegExp = "^[0-9]{5}-[0-9]{7}-[0-9]$";
@@ -57,6 +58,9 @@ export default function Register(props) {
         onSubmit:(values)=>{
             console.log(values)
             setIsRegisterPressed(true)
+            setProgress(true)
+            setData({})
+            setLoaded(false)
             axios
             .post("http://localhost:3001/register", values)
             .then((response) => setData(response.data))
@@ -218,9 +222,14 @@ export default function Register(props) {
                 />
            </Grid>
             <Grid item xs={12}>
-                <Button variant="contained" size="large" onClick={formik.handleSubmit}>
-                    Register
-                </Button>
+                <Box>
+                  <Button variant="contained" size="large" onClick={formik.handleSubmit}>
+                      Register
+                  </Button>
+                </Box>
+                <Box mt={2}>
+                  {progress && !loaded && <CircularProgress size={25}/>}
+                </Box>
             </Grid>
           </Grid>
         </DialogContent>
